@@ -52,6 +52,9 @@ Create two S3 buckets with globally unique names:
 * `handsonfinallanding`: This is where you will upload your raw data.
 * `handsonfinalprocessed`: This is where the processed data and query results will be stored.
 
+  <img width="3687" height="1581" alt="image" src="https://github.com/user-attachments/assets/2f3a1844-a590-44aa-99af-367e8bad789c" />
+
+
 ### 3. Create IAM Role for AWS Glue
 Your Glue job needs permission to read from and write to S3.
 
@@ -62,6 +65,9 @@ Your Glue job needs permission to read from and write to S3.
 5.  Attach the `AmazonS3FullAccess` policy (for this demo) or a more restrictive policy that only grants access to your two buckets.
 6.  Name the role `AWSGlueServiceRole-Reviews` and create it.
 
+   <img width="3686" height="1664" alt="image" src="https://github.com/user-attachments/assets/499fd000-0c1f-42c3-99d2-a43ef92609e4" />
+
+
 ### 4. Create the AWS Glue ETL Job
 1.  Go to the **AWS Glue** service.
 2.  In the navigation pane, click on **ETL jobs**.
@@ -71,6 +77,9 @@ Your Glue job needs permission to read from and write to S3.
 6.  Set the **Name** to `process_reviews_job`.
 7.  Select the `AWSGlueServiceRole-Reviews` **IAM Role** you created in the previous step.
 8.  Save the job.
+
+<img width="3688" height="1671" alt="image" src="https://github.com/user-attachments/assets/39d2eeec-15f7-4155-85e6-773b9f9c6ae2" />
+
 
 > **Note:** The script is already configured to use the `handsonfinallanding` and `handsonfinalprocessed` buckets.
 
@@ -83,6 +92,8 @@ This function will start the Glue job when a file is uploaded.
 4.  Set the **Runtime** to **Python 3.10** (or any modern Python runtime).
 5.  **Permissions:** Under "Change default execution role," select **Create a new role with basic Lambda permissions**. This role will be automatically named.
 6.  Create the function.
+
+<img width="3633" height="1658" alt="image" src="https://github.com/user-attachments/assets/2aa6fadb-31b7-420e-b246-7f4a76c25f4e" />
 
 #### 5a. Add Lambda Code
 Paste the contents of `src/lambda_function.py` into the code editor. Make sure the `GLUE_JOB_NAME` variable matches the name of your Glue job (`process_reviews_job`).
@@ -125,6 +136,8 @@ Your pipeline is now fully deployed and automated!
 3.  This will trigger the Lambda, which in turn starts the Glue job.
 4.  You can monitor the job's progress in the **AWS Glue** console under the **Monitoring** tab.
 
+<img width="3671" height="1645" alt="image" src="https://github.com/user-attachments/assets/25d52955-388b-4e20-ba33-df3fc934ab68" />
+
 ---
 
 ## 📈 Query Results
@@ -136,6 +149,8 @@ After the job (which may take 2-3 minutes to run), navigate to your `handsonfina
 * `s3://handsonfinalprocessed/Athena Results/rating_distribution/`
 
 You will also find the complete, cleaned dataset in `s3://handsonfinalprocessed/processed-data/`.
+
+<img width="3693" height="1586" alt="Screenshot 2025-11-18 201340" src="https://github.com/user-attachments/assets/ee398a05-2b04-41c3-8141-c748fda00dca" />
 
 ---
 ## 🧹 Cleanup
